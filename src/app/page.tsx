@@ -20,7 +20,6 @@ Custom Hooks let you extract component logic into reusable functions. A custom H
 export default function Home() {
   const [phase, setPhase] = useState<Phase>("input");
   const [inputText, setInputText] = useState(SAMPLE_TEXT);
-  const [docUrl, setDocUrl] = useState("");
   const [chunks, setChunks] = useState<DocumentChunk[]>([]);
   const [vocabulary, setVocabulary] = useState<Vocabulary[]>([]);
   const [currentChunkIndex, setCurrentChunkIndex] = useState(0);
@@ -38,7 +37,7 @@ export default function Home() {
     setPhase("analyzing");
     setError("");
     try {
-      const result = await analyzeDocument(inputText, docUrl);
+      const result = await analyzeDocument(inputText);
       setChunks(result.chunks);
       setVocabulary(result.vocabulary);
       const qResult = await generateQuestions(result.chunks[0].content);
@@ -115,15 +114,7 @@ export default function Home() {
 
           {/* Input Card */}
           <div style={styles.card}>
-            <label style={styles.label}>문서 출처 URL <span style={{ fontWeight: 400, color: "#8B95A1" }}>(선택)</span></label>
-            <input
-              type="url"
-              value={docUrl}
-              onChange={(e) => setDocUrl(e.target.value)}
-              placeholder="https://react.dev/reference/react/hooks"
-              style={styles.urlInput}
-            />
-            <label style={{ ...styles.label, marginTop: 16 }}>학습할 기술 문서</label>
+            <label style={styles.label}>학습할 기술 문서</label>
             <textarea
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
@@ -187,7 +178,7 @@ export default function Home() {
             </div>
           )}
 
-          <button onClick={() => { setPhase("input"); setInputText(""); setDocUrl(""); setChunks([]); setVocabulary([]); }} style={{ ...styles.primaryBtn, marginTop: 24 }}>
+          <button onClick={() => { setPhase("input"); setInputText(""); setChunks([]); setVocabulary([]); }} style={{ ...styles.primaryBtn, marginTop: 24 }}>
             새 문서 학습하기
           </button>
         </div>
@@ -212,25 +203,10 @@ export default function Home() {
 
         {/* Step 1: 원문 */}
         <div style={styles.card}>
-          <div style={{ ...styles.stepHeader, justifyContent: "space-between" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <span style={styles.stepBadge}>STEP 1</span>
-              <span style={styles.stepTitle}>영어 원문</span>
-            </div>
-            {docUrl && (
-              <a href={docUrl} target="_blank" rel="noopener noreferrer" style={styles.sourceLink}>
-                원문 보기 →
-              </a>
-            )}
+          <div style={styles.stepHeader}>
+            <span style={styles.stepBadge}>STEP 1</span>
+            <span style={styles.stepTitle}>영어 원문</span>
           </div>
-          {docUrl && (
-            <div style={styles.sourceUrlBox}>
-              <span style={styles.sourceUrlIcon}>🔗</span>
-              <a href={docUrl} target="_blank" rel="noopener noreferrer" style={styles.sourceUrlText}>
-                {docUrl}
-              </a>
-            </div>
-          )}
           {currentChunk?.heading && (
             <p style={styles.chunkHeading}>{currentChunk.heading}</p>
           )}
@@ -415,47 +391,6 @@ const styles: Record<string, React.CSSProperties> = {
     fontWeight: 600,
     color: "#4E5968",
     marginBottom: 10,
-  },
-  urlInput: {
-    width: "100%",
-    border: "1.5px solid #E5E8EB",
-    borderRadius: 12,
-    padding: "13px 16px",
-    fontSize: 14,
-    color: "#191F28",
-    fontFamily: "inherit",
-    outline: "none",
-    boxSizing: "border-box" as const,
-    background: "#FAFAFA",
-    transition: "border-color 0.15s",
-  },
-  sourceLink: {
-    fontSize: 13,
-    fontWeight: 600,
-    color: "#3B5BDB",
-    textDecoration: "none",
-    padding: "6px 12px",
-    background: "#EEF2FF",
-    borderRadius: 8,
-  },
-  sourceUrlBox: {
-    display: "flex",
-    alignItems: "center",
-    gap: 8,
-    background: "#F8F9FA",
-    border: "1px solid #E5E8EB",
-    borderRadius: 10,
-    padding: "10px 14px",
-    marginBottom: 14,
-  },
-  sourceUrlIcon: { fontSize: 14, flexShrink: 0 },
-  sourceUrlText: {
-    fontSize: 13,
-    color: "#3B5BDB",
-    textDecoration: "none",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap" as const,
   },
   textarea: {
     width: "100%",
