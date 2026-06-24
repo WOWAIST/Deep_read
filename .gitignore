@@ -1,0 +1,15 @@
+.next/
+node_modules/
+.DS_Store
+next-env.d.ts
+
+# Claude Code 로컬 설정 (개발자별로 다름)
+.claude/
+
+# 환경변수 파일 (민감값 포함 가능 — 절대 커밋 금지)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+# .env.example 은 키 이름만 담으므로 추적 허용
