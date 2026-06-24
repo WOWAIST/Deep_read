@@ -1,6 +1,7 @@
 .next/
 node_modules/
 .DS_Store
+next-env.d.ts
 
 # Claude Code 로컬 설정 (개발자별로 다름)
 .claude/
