@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+textarea:focus { border-color: #3B5BDB !important; outline: none; background: #fff !important; }
+button:hover { filter: brightness(0.96); }
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
