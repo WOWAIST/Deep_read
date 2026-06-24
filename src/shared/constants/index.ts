@@ -1,5 +1,4 @@
-export const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL ?? "http://localhost:11434";
-export const OLLAMA_MODEL = process.env.OLLAMA_MODEL ?? "llama3";
+// 클라이언트에 노출해도 안전한 상수만 여기에 작성
 
 export const CHUNK_MIN_WORDS = 50;
 export const CHUNK_MAX_WORDS = 400;

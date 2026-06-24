@@ -1,4 +1,4 @@
-import { OLLAMA_BASE_URL, OLLAMA_MODEL } from "@/shared/constants";
+import { OLLAMA_BASE_URL, OLLAMA_MODEL } from "./config";
 
 interface OllamaResponse {
   response: string;

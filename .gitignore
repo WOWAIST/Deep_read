@@ -1,5 +1,11 @@
 .next/
 node_modules/
-.env.local
-*.env
 .DS_Store
+
+# 환경변수 파일 (민감값 포함 가능 — 절대 커밋 금지)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+# .env.example 은 키 이름만 담으므로 추적 허용
