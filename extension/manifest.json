@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "TechDoc Coach",
+  "version": "0.1.0",
+  "description": "영어 기술 문서를 번역 없이 스스로 읽고 이해하는 훈련 도구",
+  "permissions": ["activeTab", "storage", "sidePanel"],
+  "action": {
+    "default_title": "TechDoc Coach"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/index.html"
+  },
+  "background": {
+    "service_worker": "background/index.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/index.js"]
+    }
+  ]
+}
